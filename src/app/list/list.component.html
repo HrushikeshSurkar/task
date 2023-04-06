@@ -1,0 +1,145 @@
+<h1 class="text-center">
+    Jira Board (vetty Assignment)
+</h1>
+<hr>
+
+<div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+        <!-- static button -->
+        <button class="btn btn-success">Add List</button>
+    </div>
+</div>
+
+<div class="container">
+    <!-- todo list  -->
+    <div class="row ">
+
+        <div class="col-3 p-4 head">
+            <div class="row">
+                <div class="col-8 text-center ">
+                    <h3>
+                        Todo
+                    </h3>
+                </div>
+                <!-- static button -->
+                <button type="button" class="btn-close"></button>
+            </div>
+            <div class="row" *ngFor="let l of list ; let i  = index">
+                <div class="card" style="margin:20px;width: 80%;">
+
+                    <div class="card-body">
+                        <button type="button" class="btn-close" (click)="delete(i)"
+                            style="position: absolute; margin-left: 100px;"></button>
+                        <h5 class="card-title">{{l.product}}</h5>
+                        <p class="card-text">{{l.description}}</p>
+
+                        <i type="button" (click)="addtoinprogress(i)" class="fa fa-arrow-right "
+                            style="float: right;font-size: xx-large;"></i>
+                    </div>
+                </div>
+
+            </div>
+            <button class="btn btn-warning" style="margin-left: 20px;"
+                (click)="addbtnoftodo = 'true' && todoAddbtnClick ='true'">+</button>
+        </div>
+        <!-- In progress list  -->
+
+
+        <div class="col-3 p-4 head">
+            <div class="row">
+                <div class="col-8 text-center ">
+                    <h3>
+                        Inprogress
+                    </h3>
+                </div>
+                <!-- static button -->
+
+                <button type="button" class="btn-close"></button>
+            </div>
+            <div class="row" *ngFor="let l of Inprogresslist ; let i  = index">
+                <div class="card" style="margin:20px;width: 80%;">
+
+                    <div class="card-body">
+
+                        <button type="button" class="btn-close" (click)="delete1(i)"
+                            style="position: absolute; margin-left: 100px;"></button>
+                        <h5 class="card-title">{{l.product}}</h5>
+                        <p class="card-text">{{l.description}}</p>
+
+                        <i type="button" (click)="backtolist(i)" class="fa fa-arrow-left "
+                            style="float: left;font-size: xx-large;"></i>
+                        <i type="button" (click)="addtoetc(i)" class="fa fa-arrow-right "
+                            style="float: right;font-size: xx-large;"></i>
+
+                    </div>
+                </div>
+
+            </div>
+            <button class="btn btn-warning" style="margin-left: 20px;"
+                (click)="addbtnoftodo = 'true'  && inProgressAddbtnClick = 'true'">+</button>
+        </div>
+
+        <!-- etc list -->
+        <div class="col-3 p-4 head">
+            <div class="row">
+                <div class="col-8 text-center ">
+                    <h3>
+                        etc
+                    </h3>
+                </div>
+                <!-- static button -->
+
+                <button type="button" class="btn-close"></button>
+            </div>
+            <div class="row" *ngFor="let l of etclist ; let i  = index">
+                <div class="card" style="margin:20px;width: 80%;">
+
+                    <div class="card-body">
+                        <button type="button" class="btn-close" (click)="delete2(i)"
+                            style="position: absolute; margin-left: 100px;"></button>
+                        <h5 class="card-title">{{l.product}}</h5>
+                        <p class="card-text">{{l.description}}</p>
+                        <i type="button" (click)="backToInProgress(i)" class="fa fa-arrow-left "
+                            style="float: left;font-size: xx-large;"></i>
+
+                    </div>
+                </div>
+
+            </div>
+            <button class="btn btn-warning" style="margin-left: 20px;"
+                (click)="addbtnoftodo = 'true'  && etcAddbtnClick = 'true'">+</button>
+        </div>
+    </div>
+
+    <!-- form to add new product -->
+    <div class="row" *ngIf="addbtnoftodo == 'true'">
+        <div class="col-4"></div>
+        <div class="col-4">
+
+            <form [formGroup]="addProductForm">
+                <div class="mb-3 form-group">
+                    <label for="product" class="form-label">Product</label>
+                    <input type="text" class="form-control" formControlName="product">
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="product" class="form-label">Description</label>
+                    <input type="text" class="form-control" formControlName="description">
+                </div>
+                <div class="m-4 text-center">
+                    <button type="button" class="btn btn-success " (click)="submit()" (click)="addbtnoftodo='false'"
+                        *ngIf="todoAddbtnClick == 'true' && inProgressAddbtnClick == 'false' && etcAddbtnClick =='false'">Submit</button>
+
+                    <button type="button" class="btn btn-success " (click)="submit1()"
+                        *ngIf="todoAddbtnClick == 'false' && inProgressAddbtnClick == 'true' && etcAddbtnClick =='false'"
+                        (click)="addbtnoftodo='false'">Submit</button>
+
+                    <button type="button" class="btn btn-success " (click)="submit2()"
+                        *ngIf="todoAddbtnClick == 'false' && inProgressAddbtnClick == 'false' && etcAddbtnClick =='true'"
+                        (click)="addbtnoftodo='false'">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
